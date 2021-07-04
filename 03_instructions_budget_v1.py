@@ -18,40 +18,18 @@ def yes_no(question):
             print("Please answer yes / no")
         # neither
 
-
-# If [0] is $ then remove
-
-
-def budget_que(question, low, high):
-    error = "Your Budget should be a whole number between $10 and $1000\n"
-    valid = False
-    while not valid:
-        try:
-            # ask the question
-            response = int(input(question))
-            # if the amount is too low / too high give
-            if low < response <= high:
-                return response
-                valid = True
-            else:
-                print(error)
-
-        except ValueError:
-            print(error)
-
-
-
 # Main Routine
 #
 # Below
+
 
 show_instructions = yes_no("Have you played the game before? ")
 if show_instructions == "no":
     print("instructions")
 
-budget = budget_que("How much money do you want to budget for this session?", 10, 1000)
+# If [0] is $ then remove
+
+budget = input("How much is your budget for this session? (between $10 and $1000)")
 print("Your Budget is ${}".format(budget))
-
-
 
 
