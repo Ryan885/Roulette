@@ -63,3 +63,4 @@ if show_instructions == "no":
 
 budget = budget_que("How much money do you want to budget for this session?", 10, 1000)
 print("Your Budget is ${}".format(budget))
+money = budget
