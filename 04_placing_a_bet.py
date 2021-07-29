@@ -25,7 +25,7 @@ def betting(question):
             # ask the question and remove the $ symbol if the user has entered it
             response = int(input(question).replace('$', ''))
             # if the amount is too low / too high give
-            if response < money:
+            if response < budgetcash:
                 return response
             else:
                 print(error)
@@ -33,13 +33,10 @@ def betting(question):
         except ValueError:
             print(error)
 
-
-
-
-# Main Routine Below
-
-money = 50
-show_instructions = yes_no("Would you like to place a bet on parity?")
-if show_instructions == "yes":
+budgetcash = 50
+yes_no_parity = yes_no("Would you like to place a bet on parity?")
+if yes_no_parity == "yes":
     parity = betting("How much would you like to bet on parity?")
     print(parity)
+money = budgetcash - parity
+print(money)
