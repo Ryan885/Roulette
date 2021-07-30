@@ -18,7 +18,7 @@ def yes_no(question):
         # neither
 
 def betting(question):
-    error = "You must have enough funds for your bet.\n"
+    error = "You must have enough funds for your bet & type an integer.\n"
     valid = False
     while not valid:
         try:
@@ -34,9 +34,20 @@ def betting(question):
             print(error)
 
 budgetcash = 50
+money = 50
 yes_no_parity = yes_no("Would you like to place a bet on parity?")
 if yes_no_parity == "yes":
     parity = betting("How much would you like to bet on parity?")
     print(parity)
-money = budgetcash - parity
+    money -= parity
 print(money)
+
+# round two
+yes_no_parity = yes_no("Would you like to place a bet on parity?")
+if yes_no_parity == "yes":
+    parity = betting("How much would you like to bet on parity?")
+    print(parity)
+    money -= parity
+print(money)
+
+
