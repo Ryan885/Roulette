@@ -17,6 +17,22 @@ def yes_no(question):
             print("Please answer yes / no")
         # neither
 
+
+def colourselection(question):
+    error = "Please select red or black."
+    valid = False
+    while not valid:
+        response = input(question).lower()
+        if response == "red" or response == "r":
+            response == "red"
+            return response
+        elif response == "black" or response == "b":
+            response = "black"
+            return response
+        else:
+            print(error)
+
+
 def betting(question):
     error = "You must have enough funds for your bet & type an integer.\n"
     valid = False
@@ -32,6 +48,7 @@ def betting(question):
 
         except ValueError:
             print(error)
+
 
 budgetcash = 50
 money = 50
@@ -49,5 +66,4 @@ if yes_no_parity == "yes":
     print(parity)
     money -= parity
 print(money)
-
 
