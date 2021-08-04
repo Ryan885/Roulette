@@ -3,7 +3,7 @@ def yes_no(question):
     while not valid:
         response = input(question).lower()
 
-        if response == "yes" or response == "y":
+        if response ==  "yes" or response == "y":
             response = "yes"
             return response
             # response to yes
