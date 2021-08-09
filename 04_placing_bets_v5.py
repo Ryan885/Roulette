@@ -37,23 +37,30 @@ def colourselection(question):
 
 
 def paritybetfunction(money):
+    global newmoney
+    if newmoney != "":
+        money = newmoney
     yes_no_parity = yes_no("Would you like to place a bet on parity?")
     if yes_no_parity == "yes":
         parity = betting("How much would you like to bet on parity?")
         print("You have placed a bet of ${}.".format(parity))
         money -= parity
-    print("Your remaining balance is ${}.".format(money))
-    return money
+        print("Your remaining balance is ${}.".format(money))
+        newmoney = money
+    return newmoney
 
-def colourbetfunction:
-
+def colourbetfunction(money):
+    global newmoney
+    money = newmoney
     yes_no_colour = yes_no("Would you like to place a bet on colour?")
     if yes_no_colour == "yes":
         colourselection("Which colour would you like to place a bet on? (Red/Black)")
         colourbet = betting("How much would you like to bet on colour?")
         print("You have placed a bet of ${}.".format(colourbet))
         money -= colourbet
-    print("Your remaining balance is ${}.".format(money))
+        print("Your remaining balance is ${}.".format(money))
+        newmoney = money
+        return newmoney
 
 def betting(question):
     error = "You must have enough funds for your bet & type an integer.\n"
@@ -73,8 +80,17 @@ def betting(question):
 
 budgetcash = 50
 money = budgetcash
+newmoney = money
 
-paritybet(money)
+paritybetfunction(money)
+print(newmoney)
+colourbetfunction(money)
+
+paritybetfunction(money)
+print(newmoney)
+colourbetfunction(money)
+
+
 yes_no_parity = yes_no(" you like to place a bet on parity?")
 if yes_no_parity == "yes":
     parity = betting("How much would you like to bet on parity?")
