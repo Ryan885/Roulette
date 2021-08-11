@@ -35,6 +35,7 @@ def colourselection(question):
 
 def paritybetfunction(money):
     global newmoney
+    money = newmoney
     yes_no_parity = yes_no("Would you like to place a bet on parity?")
     if yes_no_parity == "yes":
         parity = betting("How much would you like to bet on parity?")
