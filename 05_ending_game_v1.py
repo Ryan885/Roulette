@@ -38,6 +38,7 @@ def colourselection(question):
 
 def paritybetfunction(money):
     global newmoney
+    money = newmoney
     if newmoney == 0:
         print("You end the game with $0.")
         exit()
