@@ -149,9 +149,11 @@ def compchoiceprocess():
     global colour
     global parity
     global parityvalue
+    global money
 
     if comp_choice[:1].lower() == colour[:1]:
         print("Your bet on {} was CORRECT! You won ${} back".format(colour, colourvalue))
+        money += colourvalue*2
     elif comp_choice[:1].lower() == "g":
         print("Green.")
     elif colour == "none":
@@ -165,6 +167,7 @@ def compchoiceprocess():
     
         elif int(comp_choice[1:]) % 2 != 0:
             print("Your bet on {} was CORRECT! You won ${} back".format(parity, parityvalue*2))
+            money += parityvalue*2
         else:
             print("Your bet on {} was incorrect.".format(parity))
     elif parity == "even":
@@ -216,7 +219,8 @@ colourbetfunction(money)
 print(colourvalue)
 print("Comp Choice:", comp_choice)
 compchoiceprocess()
-
+print(money)
+print(newmoney)
 
 print("\n round 2")
 paritybetfunction(money)
@@ -225,3 +229,4 @@ colourbetfunction(money)
 print(colourvalue)
 print("Comp Choice:", comp_choice)
 compchoiceprocess()
+print(money)
