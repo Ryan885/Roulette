@@ -8,12 +8,15 @@ colourvalue = 0
 parity = ""
 colour = ""
 
+# list of possible places the ball could land or computer could generate
 ball_results = ["G0", "R1", "B2", "R3", "B4", "R5", "B6", "B7", "R8", "B9", "R10", "B11", "R12", "R13", "B14", "R15", "B16", "R17", "B18", "B19", "R20", "B21", "R22", "B23", "R24", "G25"]
 
 
 
 
 # Functions
+
+# Basic function for yes/no questions
 def yes_no(question):
     valid = False
     while not valid:
@@ -32,12 +35,16 @@ def yes_no(question):
         elif response == "exit":
             print("You end the game with ${}. You started with ${}".format(money, budget))
             exit()
+            # Users can exit/leave the game when they want when asked a yes/no question e.g.
+            # at the start of round 4 after made $20, when asked if they want to make a bet on parity
+            # they can also choose to quit.
         else:
             print("Please answer yes / no")
-        # neither
+        # no correct answers given (yes/no/quit)
 
+# Budget Question. Asks the user how much they want to budget for the game
 def budget_que(question, low, high):
-    error = "Your Budget should be a whole number between $10 and $1000\n"
+    error = "Your Budget should be a whole number/integer between $10 and $1000\n"
     valid = False
     while not valid:
         try:
@@ -48,9 +55,12 @@ def budget_que(question, low, high):
                 return response
             else:
                 print(error)
-
+            # if the amount is lower than $10 or higher than $1000
         except ValueError:
             print(error)
+            # error printed when the user enters e.g. "Twenty Dollars" instead of 20/$20.
+
+# selection of the bet being on either odd or even (parity)
 def parityselection(question):
     global parity
     error = "Please select odd or even."
@@ -61,13 +71,17 @@ def parityselection(question):
             response = "odd"
             parity = "odd"
             return response
+            # response to odd
         elif response == "even" or response == "e":
             response = "even"
             parity = "even"
             return response
+            # response to even
         else:
             print(error)
+            # no correct response given (odd/o or even/e)
 
+# selection of the bet being on either red or black (colour)
 def colourselection(question):
     global colour
     error = "Please select red or black."
@@ -78,13 +92,18 @@ def colourselection(question):
             response = "red"
             colour = "red"
             return response
+            # response to red
         elif response == "black" or response == "b":
             response = "black"
             colour = "black"
             return response
+            # response to black
         else:
             print(error)
+            # no correct response given (red/r or black/b)
 
+# parity bet function asks the user if they would like to bet on parity, and goes through the process
+# of betting on parity. if the user says no, parity is given the value "none"
 def paritybetfunction(money):
     global newmoney
     global parityvalue
@@ -99,16 +118,20 @@ def paritybetfunction(money):
         print("Your remaining balance is ${}.".format(money))
         newmoney = money
         return parityvalue and money
+        # if the user does make a bet on parity
     elif yes_no_parity == "no":
         parityvalue = "0"
         parity = "none"
         return parityvalue and parity
+        # if the user does not make a bet on parity
 
 def colourbetfunction(money):
     global newmoney
     global colourvalue
     global colour
     money = newmoney
+    # if/else statement only asks the user if they want to place a bet on colour if 'newmoney' > 0
+    # so they cannot say yes and get stuck in a loop unable to answer a 'correct' variable.
     if newmoney > 0:
         yes_no_colour = yes_no("Would you like to place a bet on colour?")
         if yes_no_colour == "yes":
@@ -119,11 +142,17 @@ def colourbetfunction(money):
             print("Your remaining balance is ${}.".format(money))
             newmoney = money
             return colourvalue and money
+            # if the user does make a bet on colour
         if yes_no_colour == "no":
             colourvalue = "0"
             colour = "none"
             return colourvalue and colour
+            # if the user does make a bet on colour
+    else:
+        colour = "none"
+        # else occurs when newmoney = $0 (all money has been bet on parity)
 
+# basic betting function for when a user is asked how much money the want to bet.
 def betting(question):
     error = "You must have enough funds for your bet & type an integer.\n"
     valid = False
@@ -136,9 +165,11 @@ def betting(question):
                 return response
             else:
                 print(error)
+                # error message when the bet exceeds funds, the bet is $0 or the bet is a negative number.
 
         except ValueError:
             print(error)
+            # error printed when the user enters e.g. "Twenty Dollars" instead of 20/$20.
 
 def compchoiceprocess():
     global comp_choice
@@ -167,17 +198,16 @@ def compchoiceprocess():
         else:
             print("Your bet on {} was incorrect.".format(parity))
 
-
     elif parity == "even":
         if comp_choice[:1].lower() == "g":
             print("Your bet (on parity) was incorrect.")
-
-
         elif int(comp_choice[1:]) % 2 == 0:
             print("Your bet on {} was CORRECT! You won ${} back".format(parity, parityvalue*2))
             newmoney += parityvalue*2
         else:
             print("Your bet on {} was incorrect.".format(parity))
+    else:
+        print("")
 
 def final():
     print("You now have: ${}".format(newmoney))
@@ -233,4 +263,68 @@ colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
 print("Comp Choice:", comp_choice)
 compchoiceprocess()
+final()
 
+print("\n round 3")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 4")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 5")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 6")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 7")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 8")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 9")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
+
+print("\n round 10")
+paritybetfunction(newmoney)
+colourbetfunction(newmoney)
+comp_choice: Union[str, Any] = random.choice(ball_results)
+print("Comp Choice:", comp_choice)
+compchoiceprocess()
+final()
