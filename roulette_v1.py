@@ -33,7 +33,7 @@ def yes_no(question):
             # response to no
 
         elif response == "exit":
-            print("You end the game with ${}. You started with ${}".format(money, budget))
+            print("You end the game with ${}. You started with ${}".format(newmoney, budget))
             exit()
             # Users can exit/leave the game when they want when asked a yes/no question e.g.
             # at the start of round 4 after made $20, when asked if they want to make a bet on parity
@@ -348,4 +348,6 @@ colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
 print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
-
+# after 10 round the game ends
+print("You end the game with ${}. You started with ${}".format(newmoney, budget))
+exit()
