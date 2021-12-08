@@ -33,11 +33,26 @@ def colourselection(question):
         else:
             print(error)
 
+def parityselection(question):
+    error = "Please select odd or even."
+    valid = False
+    while not valid:
+        response = input(question).lower()
+        if response == "odd" or response == "o":
+            response = "odd"
+            return response
+        elif response == "even" or response == "e":
+            response = "even"
+            return response
+        else:
+            print(error)
+
 def paritybetfunction(money):
     global newmoney
     money = newmoney
     yes_no_parity = yes_no("Would you like to place a bet on parity?")
     if yes_no_parity == "yes":
+        parityselection("What parity would you like to bet on?")
         parity = betting("How much would you like to bet on parity?")
         print("You have placed a bet of ${}.".format(parity))
         money -= parity
