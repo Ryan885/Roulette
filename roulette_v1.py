@@ -115,7 +115,7 @@ def paritybetfunction(money):
         parityvalue = betting("How much would you like to bet on {}?".format(parity))
         print("You have placed a bet of ${}.".format(parityvalue))
         money -= parityvalue
-        print("Your remaining balance is ${}.".format(money))
+        print("Your remaining balance is ${}. \n".format(money))
         newmoney = money
         return parityvalue and money
         # if the user does make a bet on parity
@@ -139,7 +139,7 @@ def colourbetfunction(money):
             colourvalue = betting("How much would you like to bet on {}?".format(colour))
             print("You have placed a bet of ${}.".format(colourvalue))
             money -= colourvalue
-            print("Your remaining balance is ${}.".format(money))
+            print("Your remaining balance is ${}. \n".format(money))
             newmoney = money
             return colourvalue and money
             # if the user does make a bet on colour
@@ -183,53 +183,53 @@ def compchoiceprocess():
 
     # computer choice process for finding if the computer generated colour is the same as the user bet on (or did not bet on)
     if comp_choice[:1].lower() == colour[:1]:
-        print("Your bet on {} was CORRECT! You won ${} back".format(colour, colourvalue*2))
+        print("\x1b[1;39;42m Your bet on {} was CORRECT! You won ${} back \033[0;0m".format(colour, colourvalue*2))
         newmoney += colourvalue*2
         # response to computer colour being the same as user colour. They receive double what they bet.
     elif comp_choice[:1].lower() == "g":
-        print("Green. Your bet (on colour) was incorrect.")
+        print("\033[1;30;41m Green. Your bet (on colour) was incorrect. \033[0;0m")
         # response to colour being green
     elif colour == "none":
         print("")
         # response to no colour being bet on
     else:
-        print("Your bet on {} was incorrect.".format(colour))
+        print("\033[1;30;41m Your bet on {} was incorrect. \033[0;0m".format(colour))
         # response to else (e.g. the computer generated colour being red when user choice is black)
 
     # computer choice process for finding if the computer generated colour is the same as the user bet on (or did not bet on)
     if parity == "odd":
         # if parity is odd then
         if comp_choice[:1].lower() == "g":
-            print("Green. Your bet (on parity) was incorrect.")
+            print("\033[1;30;41m Green. Your bet (on parity) was incorrect. \033[0;0m")
             # response to colour being green
         elif int(comp_choice[1:]) % 2 != 0:
-            print("Your bet on {} was CORRECT! You won ${} back".format(parity, parityvalue*2))
+            print("\x1b[1;39;42m Your bet on {} was CORRECT! You won ${} back \033[0;0m".format(parity, parityvalue*2))
             newmoney += parityvalue*2
             # response to computer choice parity being odd. User receives double their bet back
         else:
-            print("Your bet on {} was incorrect.".format(parity))
+            print("\033[1;30;41m Your bet on {} was incorrect. \033[0;0m".format(parity))
             # response to else (when the comp choice number % 2 = 0, showing it is even)
 
 
     elif parity == "even":
         # else if parity is even then
         if comp_choice[:1].lower() == "g":
-            print("Your bet (on parity) was incorrect.")
+            print("\033[1;30;41m Your bet (on parity) was incorrect. \033[0;0m")
             # response to colour being green
         elif int(comp_choice[1:]) % 2 == 0:
-            print("Your bet on {} was CORRECT! You won ${} back".format(parity, parityvalue*2))
+            print("\x1b[1;39;42m Your bet on {} was CORRECT! You won ${} back \033[0;0m".format(parity, parityvalue*2))
             newmoney += parityvalue*2
             # response to parity being even. User receives double their bet back
         else:
-            print("Your bet on {} was incorrect.".format(parity))
+            print("\033[1;30;41m Your bet on {} was incorrect. \033[0;0m".format(parity))
             # response to else (when the comp choice number % 2 does not = to 0)
 
     # final balance for the turn printed.
-    print("You now have: ${}".format(newmoney))
+    print("\033[1;30;47m You now have: ${} \033[0;0m".format(newmoney))
 
     # checks to see if the balance is 0, if so the game ends.
     if newmoney == 0:
-        print("You end the game with $0.")
+        print("\033[1;30;47m You end the game with $0. \033[0;0m")
         exit()
 
 
@@ -237,7 +237,7 @@ def compchoiceprocess():
 # Main Routine Below
 
 # Asks the User if they have played the game.
-show_instructions = yes_no("Have you played the game before? ")
+show_instructions = yes_no("Have you played the game before?")
 if show_instructions == "no":
     print("******* INSTRUCTIONS *******\n"
           "Each round a random number (that has a colour) will be chosen.\n\n"
@@ -257,14 +257,14 @@ if show_instructions == "no":
 
 # Asks the user how much money they would like to budget for the session & prints the budget.
 budget = budget_que("How much money do you want to budget for this session?", 10, 1000)
-print("Your Budget is ${}".format(budget))
+print("Your Budget is ${} \n".format(budget))
 
 # variables relating to money
 money = budget
 newmoney = money
 
 # Round 1
-print("round 1")
+print("\033[1;30;47m round 1 \033[0;0m")
 # process for a parity bet
 paritybetfunction(newmoney)
 # process for a colour bet
@@ -272,80 +272,80 @@ colourbetfunction(newmoney)
 # a random computer choice from the list is generated
 comp_choice: Union[str, Any] = random.choice(ball_results)
 # the computer choice is printed
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 # the process for what the program does with the computer choice (e.g. wins back money, ends game with $0, etc).
 compchoiceprocess()
 
 
 
-print("\n round 2")
+print("\n \033[1;30;47m round 2 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 3")
+print("\n \033[1;30;47m round 3 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 4")
+print("\n \033[1;30;47m round 4 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 5")
+print("\n \033[1;30;47m round 5 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 6")
+print("\n \033[1;30;47m round 6 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 7")
+print("\n \033[1;30;47m round 7 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 8")
+print("\n \033[1;30;47m round 8 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 9")
+print("\n \033[1;30;47m round 9 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
 
-print("\n round 10")
+print("\n \033[1;30;47m round 10 \033[0;0m")
 paritybetfunction(newmoney)
 colourbetfunction(newmoney)
 comp_choice: Union[str, Any] = random.choice(ball_results)
-print("Comp Choice:", comp_choice)
+print("\x1b[1;31;40m Comp Choice:", comp_choice, "\033[0;0m")
 compchoiceprocess()
 
