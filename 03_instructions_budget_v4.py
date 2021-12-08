@@ -30,7 +30,7 @@ def budget_que(question, low, high):
             # ask the question and remove the $ symbol if the user has entered it
             response = int(input(question).replace('$', ''))
             # if the amount is too low / too high give
-            if low < response <= high:
+            if low <= response <= high:
                 return response
             else:
                 print(error)
